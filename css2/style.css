@@ -1,0 +1,138 @@
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.container{
+  min-height: 100%;
+  position: relative;
+  width: 980px;
+  margin: 0 auto;
+}
+header {
+  background-color: #F5B4B3;
+  height: 50px;
+  font-size: 1.5rem;
+}
+.logo_image {
+  width: 110px;
+  float: left;
+  margin: 0;
+}
+.top_menu li {
+  float: left;
+  width: auto;
+}
+.top_menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 15px;
+}
+.top_menu li a:hover {
+  text-decoration: underline;
+}
+.clearfix:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+ul.top_menu {
+  float: right;
+}
+.image_area{
+  width: 100%;
+}
+.side_menu{
+  width: 300px;
+  float: left;
+}
+.side_menu li:hover{
+    opacity: 0.6;
+}
+.side_menu a :hover{
+    opacity: 0.6;
+}
+.side_menu li{
+  background-color: #F5B4B3;
+  height: 6rem;
+  margin-bottom: 10px;
+}
+.side_menu li a{
+  font-size: 2rem;
+  color: #fff;
+  padding: 2rem;
+  display: block;
+  text-decoration: none;
+}
+.banner img{
+  width: 100%;
+}
+.banner{
+  margin-top: 20px;
+}
+.wrapper{
+  margin-top: 10px;
+  padding-bottom: 100px;
+}
+.content{
+  width: 660px;
+  margin-left: 20px;
+  font-size: 1.5rem;
+  float: left;
+}
+.news{
+  height: 200px;
+  background-color: #FCE8E7;
+  padding: 20px;
+  overflow: scroll;
+  line-height: 2;
+}
+.news::-webkit-scrollbar {
+  display: none;
+}
+.banner_content {
+  margin-top: 10px;
+  display: table;
+}
+.banner_content p {
+  display: table-cell;
+}
+.banner_content p img {
+  width: 50%;
+  margin-bottom: 20px;
+  float: left;
+}
+.banner_content:hover{
+  opacity: 0.6;
+}
+.footer{
+  background-color: #4D4D4D;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  display: table;
+}
+.footer p {
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+.side_menu .point{
+  background-color: #FCECEC;
+}
+.side_menu .point a{
+  color: #4D4D4D;
+}
