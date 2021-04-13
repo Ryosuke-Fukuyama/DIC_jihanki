@@ -28,18 +28,18 @@
 
 
 # ジュースの属性定義
-class drink
+class Drink
   attr_reader :name, :price
   def self.coke
-    self.new (120, :coke)
+    self.new 120, :coke
   end
   def self.redbull
-    self.new (200, :red_bull)
+    self.new 200, :red_bull
   end
   def self.water
-    self.new (100, :water)
+    self.new 100, :water
   end
-  def initialize (price, name)
+  def initialize price, name
     @name = name
     @price = price
   end
@@ -53,7 +53,7 @@ end
 
 
 # お金の増減管理
-class amount
+class Amount
   def initialize
     #一時的に入ってるキャッシュトレー
     @slot_money = slot_money = 0
@@ -79,21 +79,21 @@ end
 
 
 
-class store
+class Store
   # 在庫管理(メニュー変更)
   def stock_juice(name, stock)
     button(:name) = (stock).times { Drink.(name) }
     buttons = button(:name)
   end
   def initialize
-    @button(:name) = button_(name)
+    @button(:name) = button(name)
     @buttons = buttons
   end
 end
 
 
 # 表示
-class display
+class Display
   # ジュースの情報を出力
   def store_juice
     puts buttons
