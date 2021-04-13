@@ -2,26 +2,28 @@
 # irb
 # require '/Users/ryosuke.f/workspace/pairwork/pair_sample.rb'
 # vm = VendingMachine.new   # 初期設定（自動販売機インスタンスを作成して、vmという変数に代入する）
-#
-#
-#
+# vm = Drink.new
+# vm = Amount.new
+# vm = Store
+# vm = Display
+
 # ⓪
-# vm.slot_money(100)        # 作成した自動販売機に100円を入れる
+# vm.insert(money)      # 作成した自動販売機にお金を入れる
 # vm.current_slot_money     # 作成した自動販売機に入れたお金がいくらかを確認する（表示する）
 # vm.return_money           # 作成した自動販売機に入れたお金を返してもらう
 # ①
 # vm.slot_money(1)          # 想定外のものが投入された場合は、投入金額に加算せず、それをそのまま釣り銭としてユーザに出力する。
-                            # 文字の場合の条件分岐は後日？　"これはお金ではありません"
+                            # 文字の場合の条件分岐は後日？
 # ②
-# vm.store_juice            # 格納されているジュースの情報（値段と名前と在庫）を取得できる。
+# vm.buttons                # 格納されているジュースの情報（値段と名前と在庫）を取得できる。
 # ③
 # vm.choice                 # 投入金額、在庫の点で、コーラが購入できるかどうかを取得できる。
-# vm.purchase               # ジュース値段以上の投入金額が投入されている条件下で購入操作を行うと、ジュースの在庫を減らし、売り上げ金額を増やす。
-# vm.current_sale_proceeds  # 現在の売上金額を取得できる。
+# vm.vm.purchase(name)      # ジュース値段以上の投入金額が投入されている条件下で購入操作を行うと、ジュースの在庫を減らし、売り上げ金額を増やす。
+# vm.sale_proceeds          # 現在の売上金額を取得できる。
 # ④
-# vm.store0                 # ジュースを3種類管理できるようにする。
+# vm.stock_juice(name, stock) # ジュースを3種類管理できるようにする。
 # ⑤
-# vm.purchase(0~2)          # 購入するジュースを選択し、釣り銭を出力する。
+# vm.purchase(name)         # 購入するジュースを選択し、釣り銭を出力する。
 
 
 
@@ -51,7 +53,7 @@ end
 
 
 # お金の増減管理
-class 	amount
+class amount
   def initialize
     #一時的に入ってるキャッシュトレー
     @slot_money = slot_money = 0
@@ -77,13 +79,13 @@ end
 
 
 
-class stocks
+class store
   # 在庫管理(メニュー変更)
   def stock_juice(name, stock)
     button(:name) = (stock).times { Drink.(name) }
     buttons = button(:name)
   end
-  def initialize(name)
+  def initialize
     @button(:name) = button_(name)
     @buttons = buttons
   end
@@ -121,7 +123,7 @@ class VendingMachine
     if push.length != nil
       if slot_money >= push[:price]
         slot_money -= push[:price]
-        push[:stock] -= 1
+        push.length -= 1
         sale += push[:price]
         puts slot_money
       end
