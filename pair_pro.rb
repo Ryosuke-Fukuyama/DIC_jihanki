@@ -71,6 +71,7 @@ class VendingMachine
   # 以下引数構文ぶっ壊れ
 
   def store(name, num)
+    @name = name
     name = Drink.name.hash
     name[:stock] = num
     buttons << name
