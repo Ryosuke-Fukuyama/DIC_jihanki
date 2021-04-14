@@ -43,9 +43,10 @@ class VendingMachine
 
     slot_money = 0
     sale = 0
+    buttons = []
     coke = Drink.coke.hash
     coke[:stock] = 5
-    buttons = coke
+    buttons << coke
   end
   def insert(money)
     # !数字以外のもの確認!
@@ -68,15 +69,15 @@ class VendingMachine
 
   # 以下引数構文ぶっ壊れ
 
-  def store(name, value)
+  def store(name, num)
     name = Drink.name.hash
-    name[:stock] = value
+    name[:stock] = num
     buttons << name
   end
   def choice
     buttons.length.times do |i|
       if ( buttons[i][:stock] >= 1 ) && ( slot_money >= buttons[i][:price] )
-        p  buttons[i][:name]
+        buttons[i][:name]
       end
     end
   end
