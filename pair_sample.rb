@@ -2,7 +2,6 @@
 # irb
 # require '/Users/ryosuke.f/workspace/pairwork/pair_sample.rb'
 # vm = VendingMachine.new   # 初期設定（自動販売機インスタンスを作成して、vmという変数に代入する）
-# vm = Drink.new
 # vm = Amount.new
 # vm = Store
 # vm = Display
@@ -82,7 +81,7 @@ end
 class Store
   # 在庫管理(メニュー変更)
   def stock_juice(name, stock)
-    button(:name) = (stock).times { Drink.(name) }
+    button(:name) =  { Drink.(name) } + (stock: (stock))
     buttons = button(:name)
   end
   def initialize
@@ -120,10 +119,10 @@ class VendingMachine
   # 購入する
   def purchase(name)
     push = button(:name)
-    if push.length != nil
+    if push[:stock] != 0
       if slot_money >= push[:price]
         slot_money -= push[:price]
-        push.length -= 1
+        push[stock] -= 1
         sale += push[:price]
         puts slot_money
       end
