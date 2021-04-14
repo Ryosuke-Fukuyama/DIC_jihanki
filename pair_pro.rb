@@ -33,6 +33,7 @@ class Drink
 end
 
 class VendingMachine
+  attr_reader
   MONEY = [10, 50, 100, 500, 1000].freeze
   def initialize
     @slot_money = slot_money
