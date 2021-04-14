@@ -65,6 +65,9 @@ class VendingMachine
   def store_juice
     buttons
   end
+
+  # 以下引数構文ぶっ壊れ
+
   def store(name, value)
     name = Drink.name.hash
     name[:stock] = value
