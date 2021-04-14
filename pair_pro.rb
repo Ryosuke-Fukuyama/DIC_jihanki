@@ -84,6 +84,7 @@ class VendingMachine
   def purchase(name)
     if ( name.values_at(:stock) >= 1 ) && ( slot_money >= name.values_at(:price) )
       slot_money -= name.values_at(:price)
+      # 配列 - 整数 の状態(要変換！)
       name.values_at(:stock) -= 1
       sale += name.values_at(:price)
       slot_money
