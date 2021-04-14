@@ -17,7 +17,7 @@ class Drink
   def self.coke
     self.new 120, :coke
   end
-  def self.redbull
+  def self.red_bull
     self.new 200, :red_bull
   end
   def self.water
@@ -27,28 +27,33 @@ class Drink
     @name = name
     @price = price
   end
+  def hash
+    hash = {name: name, price: price}
+  end
 end
 
 class VendingMachine
-   MONEY = [10, 50, 100, 500, 1000].freeze
-   @slot_money = slot_money
-   @sale = sale
-   @coke = coke
-   @buttons = buttons
-   def initialize
+  MONEY = [10, 50, 100, 500, 1000].freeze
+  def initialize
+    @slot_money = slot_money
+    @sale = sale
+    @coke = coke
+    @stock = stock
+    @buttons = buttons
+
     slot_money = 0
     sale = 0
-    coke = Drink.coke
+    coke = Drink.coke.hash
     coke[:stock] = 5
     buttons = coke
-  end
-  def current_slot_money
-    slot_money
   end
   def insert(money)
     # !数字以外のもの確認!
     return puts money unless MONEY.include?(money)
     slot_money += money
+  end
+  def current_slot_money
+    slot_money
   end
   def return_money
     slot_money
@@ -61,18 +66,19 @@ class VendingMachine
     buttons
   end
   def store(name, value)
-    # hash = {name: drink.name, price: drink.price, stock: num}
-    buttons << (Drink.name[:stock] = value)
+    name = Drink.name.hash
+    name[:stock] = value
+    buttons << name
   end
   def choice
     buttons.length.times do |i|
-      if ( buttons[i][:stock] >= 1 ) && ( current_slot_money >= buttons[i][:price] )
+      if ( buttons[i][:stock] >= 1 ) && ( slot_money >= buttons[i][:price] )
         p  buttons[i][:name]
       end
     end
   end
   def purchase(name)
-    if ( name.values_at(:stock) >= 1 ) && ( current_slot_money >= name.values_at(:price) )
+    if ( name.values_at(:stock) >= 1 ) && ( slot_money >= name.values_at(:price) )
       slot_money -= name.values_at(:price)
       name.values_at(:stock) -= 1
       sale += name.values_at(:price)
