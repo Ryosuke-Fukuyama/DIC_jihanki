@@ -2,8 +2,8 @@
 # irb
 # require '/Users/ryosuke.f/workspace/pairwork/pair_pro.rb'
 # vm = VendingMachine.new   インスタンス化
-# vm.slot_money ()   金額を入れる(制限付)
-# vm.store(redbull, 5)  在庫追加(レッドブルを5本)
+# vm.insert ()   金額を入れる(制限付)
+# vm.store(red_bull, 5)  在庫追加(レッドブルを5本)
 # vm.store(water, 5)  在庫追加(水を5本)
 # vm.store_juice    在庫確認
 # vm.choice   購入可能商品の照会
@@ -33,63 +33,56 @@ class Drink
 end
 
 class VendingMachine
-  attr_reader
+  # 失敗
+  # attr_reader
   MONEY = [10, 50, 100, 500, 1000].freeze
   def initialize
-    @slot_money = slot_money
-    @sale = sale
-    @coke = coke
-    @stock = stock
-    @buttons = buttons
-
-    slot_money = 0
-    sale = 0
-    buttons = []
-    coke = Drink.coke.hash
-    coke[:stock] = 5
-    buttons << coke
+    @slot_money = 0
+    @sale = 0
+    @buttons = []
+    @coke = Drink.coke.hash
+    @coke[:stock] = 5
+    @buttons << @coke
   end
   def insert(money)
-    # !数字以外のもの確認!
+    # ?文字のエラー対策?
     return puts money unless MONEY.include?(money)
-    slot_money += money
+    @slot_money += money
   end
   def current_slot_money
-    slot_money
+    @slot_money
   end
   def return_money
-    slot_money
-    slot_money = 0
+    @slot_money
+    @slot_money = 0
   end
   def sale_proceeds
-    sale
+    @sale
   end
   def store_juice
-    buttons
+    @buttons
   end
 
-  # 以下引数構文ぶっ壊れ
-
+  # エラー:引数構文ぶっ壊れ
   def store(name, num)
-    @name = name
-    name = Drink.name.hash
-    name[:stock] = num
-    buttons << name
+    @name = Drink.name.hash
+    @name[:stock] = num
+    @buttons << @name
   end
   def choice
-    buttons.length.times do |i|
-      if ( buttons[i][:stock] >= 1 ) && ( slot_money >= buttons[i][:price] )
-        buttons[i][:name]
+    @buttons.each do |button|
+      if ( button[:stock] >= 1 ) && ( @slot_money >= button[:price] )
+        button[:name]
       end
     end
   end
-  def purchase(name)
-    if ( name.values_at(:stock) >= 1 ) && ( slot_money >= name.values_at(:price) )
-      slot_money -= name.values_at(:price)
-      # 配列 - 整数 の状態(要変換！)
-      name.values_at(:stock) -= 1
-      sale += name.values_at(:price)
-      slot_money
+  # エラー:引数渡し方?
+  def purchase(@name)
+    if ( @name[:stock] >= 1 ) && ( @slot_money >= @name[:price] )
+      @slot_money -= name[:price]
+      @name[:stock].to_i -= 1
+      @sale += @name[:price]
+      @slot_money
     end
   end
 end
