@@ -1,16 +1,16 @@
 # 稼働例
 # irb
 # require '/Users/ryosuke.f/workspace/pairwork/pair_pro.rb'
-# vm = VendingMachine.new   インスタンス化
-# vm.insert ()   金額を入れる(制限付)
-# vm.store(red_bull, 5)  在庫追加(レッドブルを5本)
-# vm.store(water, 5)  在庫追加(水を5本)
-# vm.store_juice    在庫確認
-# vm.choice   購入可能商品の照会
-# vm.purchase()    商品名で購入
-# vm.current_slot_money    現在の投入金額
-# vm.sale_proceeds    売上
-# vm.return_money   投入金返却
+# vm = VendingMachine.new
+# vm.insert ()
+# vm.return_money
+# vm.store(red_bull, 5)
+# vm.store(water, 5)
+# vm.store_info      在庫確認
+# vm.purchasable?    購入可能商品の照会
+# vm.purchase()      購入(商品名)
+# vm.current_slot_money
+# vm.sale_proceeds
 
 class Drink
   attr_reader :name, :price
@@ -59,7 +59,7 @@ class VendingMachine
   def sale_proceeds
     @sale
   end
-  def store_juice
+  def store_info
     @buttons
   end
 
@@ -69,7 +69,7 @@ class VendingMachine
     @name[:stock] = num
     @buttons << @name
   end
-  def choice
+  def purchasable?
     @buttons.each do |button|
       if ( button[:stock] >= 1 ) && ( @slot_money >= button[:price] )
         button[:name]
