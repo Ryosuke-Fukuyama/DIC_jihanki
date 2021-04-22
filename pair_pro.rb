@@ -65,7 +65,7 @@ class VendingMachine
 
   # エラー:引数
   def store(name)
-    @name = Drink.name.hash
+    @"#{name} = Drink.name.hash
   end
   def stock(name, num)
     @"#{name}"[:stock] = num
