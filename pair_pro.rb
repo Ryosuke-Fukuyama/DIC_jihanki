@@ -63,11 +63,13 @@ class VendingMachine
     @buttons
   end
 
-  # エラー:引数構文ぶっ壊れ
-  def store(name, num)
+  # エラー:引数
+  def store(name)
     @name = Drink.name.hash
-    @name[:stock] = num
-    @buttons << @name
+  end
+  def stock(name, num)
+    @"#{name}"[:stock] = num
+    @buttons << @"#{name}"
   end
   def purchasable?
     @buttons.each do |button|
@@ -76,12 +78,12 @@ class VendingMachine
       end
     end
   end
-  # エラー:引数渡し方?
-  def purchase(@name)
-    if ( @name[:stock] >= 1 ) && ( @slot_money >= @name[:price] )
+  # エラー:引数
+  def purchase(name)
+    if ( @"#{name}"[:stock] >= 1 ) && ( @slot_money >= @"#{name}"[:price] )
       @slot_money -= name[:price]
-      @name[:stock].to_i -= 1
-      @sale += @name[:price]
+      @"#{name}"[:stock].to_i -= 1
+      @sale += @"#{name}"[:price]
       @slot_money
     end
   end
