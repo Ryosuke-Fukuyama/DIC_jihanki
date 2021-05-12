@@ -67,9 +67,10 @@ class VendingMachine
   def store(name)
     @"#{name}" = Drink.name.hash
   end
-  def stock(name, num)
-    @"#{name}"[:stock] = num
-    @buttons << @"#{name}"
+  def stock(drink, num)
+    match_button = @buttons.find(name: drink)
+    @"#{drink}"[:stock] += num
+    @buttons += @"#{drink}"
   end
   def purchasable?
     @buttons.each do |button|
